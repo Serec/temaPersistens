@@ -50,14 +50,14 @@ public class DBCustomer implements IFDBCustomer
 	}
 
 	//Find a customer	
-	private Customer findCustomer(String phoneNo)
+	public Customer findCustomer(String phoneNo)
 	{
 		String wClause = " phoneNo = '" + phoneNo + "'";
 		return singleWhere(wClause);
 	}
 
 	//update a customer
-	private int updateCustomer(Customer cus)
+	public int updateCustomer(Customer cus)
 	{
 		int rc = -1;
 
@@ -113,9 +113,6 @@ public class DBCustomer implements IFDBCustomer
 		}
 		return cusObj;
 	}
-
-
-
 
 	private String buildQuery(String wClause)
 	{
