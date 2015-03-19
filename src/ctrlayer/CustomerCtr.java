@@ -10,13 +10,12 @@ public class CustomerCtr
 	}
 
 	//insert customer
-	public void insertNewCustomer(String name, String address, String zipCode, String city, String phoneNo) throws Exception
+	public void insertNewCustomer(String name, String address, String zipCode, String phoneNo) throws Exception
 	{
 		Customer cusObj = new Customer();
 		cusObj.setName(name);
 		cusObj.setAddress(address);
 		cusObj.setZipCode(zipCode);
-		cusObj.setCity(city);
 		cusObj.setPhoneNo(phoneNo);
 		try
 		{
@@ -49,7 +48,6 @@ public class CustomerCtr
 		cus.setName(name);
 		cus.setAddress(address);
 		cus.setZipCode(zipCode);
-		cus.setCity(city);
 		cus.setPhoneNo(phoneNo);
 		return dbCus.updateCustomer(cus);
 	}

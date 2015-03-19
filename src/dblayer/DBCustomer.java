@@ -28,9 +28,9 @@ public class DBCustomer implements IFDBCustomer
 		System.out.println("next id = " + nextID);
 
 		int rc = -1;
-		String query = "INSERT INTO customer(id, name, address, zipCode, city, phoneNo) "
+		String query = "INSERT INTO customer "
 				+ "VALUES('" + nextID + "','" + cus.getName() + "','" + cus.getAddress()  + "','" + cus.getZipCode()
-				+ "','" + cus.getCity() + "','" + cus.getPhoneNo();
+				+ "','" + cus.getPhoneNo() +"')";
 
 		System.out.println("insert : " + query);
 
@@ -65,7 +65,6 @@ public class DBCustomer implements IFDBCustomer
 				"name ='" + cus.getName() +"', "+
 				"address ='" + cus.getAddress() +"', "+
 				"zipCode ='" + cus.getZipCode() +"', "+
-				"city = '" + cus.getCity() +"', "+
 				"phoneNo = '" + cus.getPhoneNo() + "'";
 
 		System.out.println("Update query: " + query);
@@ -152,7 +151,6 @@ public class DBCustomer implements IFDBCustomer
 			cusObj.setName(results.getString("name"));
 			cusObj.setAddress(results.getString("address"));
 			cusObj.setZipCode(results.getString("zipCode"));
-			cusObj.setCity(results.getString("city"));
 			cusObj.setPhoneNo(results.getString("phoneNo"));
 		}
 		catch(Exception e)

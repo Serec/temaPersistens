@@ -5,7 +5,6 @@ public class Customer {
 	private String name;
 	private String address;
 	private String zipCode;
-	private String city;
 	private String phoneNo;
 	
 	public Customer()
@@ -13,18 +12,18 @@ public class Customer {
 		
 	}
 	
-	public Customer(String phoneNo)
+	public Customer(String name, String phoneNo)
 	{
+		this.name = name;
 		this.phoneNo = phoneNo;
 	}
 	
 	
-	public Customer(String name, String address, String zipCode, String city, String phoneNo)
+	public Customer(String name, String address, String zipCode, String phoneNo)
 	{
 		this.name = name;
 		this.address = address;
 		this.zipCode = zipCode;
-		this.city = city;
 		this.phoneNo = phoneNo;
 	}
 
@@ -50,14 +49,6 @@ public class Customer {
 
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
 	}
 
 	public String getPhoneNo() {
