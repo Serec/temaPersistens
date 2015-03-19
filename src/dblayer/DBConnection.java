@@ -67,6 +67,17 @@ public class DBConnection
 		return instance;
 	}
 
+	public static void startTransaction()
+	{
+		try{
+			con.setAutoCommit(false);
+		}
+		catch(Exception e){
+			System.out.println("Failed to start transaction");
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	public static void commitTransaction()
 	{
 		try{
