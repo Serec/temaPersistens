@@ -82,6 +82,26 @@ public class DBCustomer implements IFDBCustomer
 		}
 		return(rc);
 	}
+	
+	//Delete a customer
+	public int deleteCustomer(String phoneNo)
+	{
+		int rc = -1;
+		String query = "DELETE FROM customer WHERE phoneNo = '" + phoneNo + "'";
+		System.out.println(query);
+		try
+		{
+			Statement stmt = con.createStatement();
+			stmt.setQueryTimeout(5);
+			rc = stmt.executeUpdate(query);
+			stmt.close();
+		}
+		catch(Exception e)
+		{
+			System.out.println("Delete exception in customer db: " + e);
+		}
+		return rc;
+	}
 
 
 	private Customer singleWhere(String wClause)
