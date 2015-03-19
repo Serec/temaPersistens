@@ -32,28 +32,35 @@ public class DBCustomerTest {
 		}
 		else
 		{
-			fail("Not yet implemented");
+			fail("Customer not found");
 		}
 	}
 
-//	@Test
-//	public void testUpdateCustomer() 
-//	{
-//		DBCustomer dbCus = new DBCustomer();
-//		
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testDeleteCustomer()
-//	{
-//		DBCustomer dbCus = new DBCustomer();
-//		fail("Not yet implemented");
-//	}
+	//	@Test
+	//	public void testUpdateCustomer() 
+	//	{
+	//		DBCustomer dbCus = new DBCustomer();
+	//		
+	//		fail("Not yet implemented");
+	//	}
+
+	@Test
+	public void testDeleteCustomer()
+	{
+		DBCustomer dbCus = new DBCustomer();
+		if(dbCus.deleteCustomer("12345678") > 0)
+		{
+			System.out.println("Customer deleted");
+		}
+		else
+		{
+			fail("Customer not deleted");
+		}
+	}
 
 
 
 
 }
 
-}
+
