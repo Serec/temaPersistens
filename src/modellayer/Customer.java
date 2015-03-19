@@ -16,6 +16,12 @@ public class Customer {
 		this.city = city;
 		this.phoneNo = phoneNo;
 	}
+	
+	public Customer(String phoneNo)
+	{
+		this.phoneNo = phoneNo;
+	}
+	
 
 	public String getName() {
 		return name;
@@ -56,5 +62,4 @@ public class Customer {
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
-	
 }
