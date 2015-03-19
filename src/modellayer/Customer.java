@@ -68,7 +68,4 @@ public class Customer {
 		this.phoneNo = phoneNo;
 	}
 	
-	
-	
-	
 }
