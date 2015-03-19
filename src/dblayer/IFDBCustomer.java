@@ -14,5 +14,7 @@ public interface IFDBCustomer
 	public Customer findCustomer(String phoneNo);
 	//update information about customer
 	public int updateCustomer(Customer cus);
+	//delete customer
+	public int deleteCustomer(String phoneNo);
 
 }
