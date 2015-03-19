@@ -8,17 +8,6 @@ public class Customer {
 	private String city;
 	private String phoneNo;
 	
-	public Customer()
-	{
-		
-	}
-	
-	public Customer(String phoneNo)
-	{
-		this.phoneNo = phoneNo;
-	}
-	
-	
 	public Customer(String name, String address, String zipCode, String city, String phoneNo)
 	{
 		this.name = name;
