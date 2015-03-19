@@ -8,13 +8,14 @@ public class Customer {
 	private String phoneNo;
 	
 	public Customer()
-	{
-		
+	{		
 	}
 	
-	public Customer(String name, String phoneNo)
+	
+	public Customer(String name, String zipCode, String phoneNo)
 	{
 		this.name = name;
+		this.zipCode = zipCode;
 		this.phoneNo = phoneNo;
 	}
 	

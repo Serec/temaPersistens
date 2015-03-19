@@ -135,7 +135,7 @@ public class DBCustomer implements IFDBCustomer
 
 	private String buildQuery(String wClause)
 	{
-		String query = " Select id, name, address, zipCode, phoneNo FROM customer";
+		String query = " SELECT id, name, address, zipCode, phoneNo FROM customer";
 		if(wClause.length()>0)
 		{
 			query = query  +" WHERE " + wClause;			
