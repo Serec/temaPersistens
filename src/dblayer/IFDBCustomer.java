@@ -6,7 +6,6 @@ import modellayer.*;
  * @version 19.03.2015
  */
 
-
 public interface IFDBCustomer 
 {
 	//insert a new customer
