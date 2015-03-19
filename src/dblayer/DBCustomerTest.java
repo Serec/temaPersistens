@@ -19,12 +19,41 @@ public class DBCustomerTest {
 		{
 			fail("Customer not inserted");
 		}
-		
-		
-		
-		
-		
-		
 	}
+
+	@Test
+	public void testFindCustomer() 
+	{
+		DBCustomer dbCus = new DBCustomer();
+		Customer cus = dbCus.findCustomer("12345678");
+		if(cus != null)
+		{
+			System.out.println("Customer found");
+		}
+		else
+		{
+			fail("Not yet implemented");
+		}
+	}
+
+//	@Test
+//	public void testUpdateCustomer() 
+//	{
+//		DBCustomer dbCus = new DBCustomer();
+//		
+//		fail("Not yet implemented");
+//	}
+//
+//	@Test
+//	public void testDeleteCustomer()
+//	{
+//		DBCustomer dbCus = new DBCustomer();
+//		fail("Not yet implemented");
+//	}
+
+
+
+
+}
 
 }
