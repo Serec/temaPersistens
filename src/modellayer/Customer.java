@@ -12,6 +12,21 @@ public class Customer {
 	{
 		
 	}
+	
+	public Customer(String phoneNo)
+	{
+		this.phoneNo = phoneNo;
+	}
+	
+	
+	public Customer(String name, String address, String zipCode, String city, String phoneNo)
+	{
+		this.name = name;
+		this.address = address;
+		this.zipCode = zipCode;
+		this.city = city;
+		this.phoneNo = phoneNo;
+	}
 
 	public String getName() {
 		return name;
@@ -53,7 +68,6 @@ public class Customer {
 		this.phoneNo = phoneNo;
 	}
 	
-//	public Customer()
 	
 	
 	
