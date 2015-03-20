@@ -40,7 +40,7 @@ public class CustomerCtr
 	}
 
 	//update customer
-	public int updateCustomer(String name, String address, String zipCode, String city, String phoneNo)
+	public int updateCustomer(String name, String address, String zipCode, String phoneNo)
 	{
 		IFDBCustomer dbCus = new DBCustomer();
 		Customer cus = new Customer();

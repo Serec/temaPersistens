@@ -65,8 +65,8 @@ public class DBCustomer implements IFDBCustomer
 		String query = " UPDATE customer SET " + 
 				"name = '" + cusObj.getName() +"', "+
 				"address = '" + cusObj.getAddress() +"', "+
-				"zipCode = '" + cusObj.getZipCode() +"', "+
-				"phoneNo = '" + cusObj.getPhoneNo() + "'";
+				"zipCode = '" + cusObj.getZipCode() +"'" +
+				" WHERE phoneNo = '" + cusObj.getPhoneNo() + "'";
 
 		System.out.println("Update query: " + query);
 		try
