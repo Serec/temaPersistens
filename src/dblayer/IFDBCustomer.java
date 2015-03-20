@@ -2,7 +2,7 @@ package dblayer;
 import modellayer.*;
 /**
  * Interface to DBCustomers
- * @author Søren
+ * @author Soren
  * @version 19.03.2015
  */
 

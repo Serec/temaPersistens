@@ -4,7 +4,7 @@ import modellayer.*;
 import java.sql.*;
 /**
  * 
- * @author Søren
+ * @author Soren
  * @version 19.03.2015
  *
  */
@@ -59,13 +59,14 @@ public class DBCustomer implements IFDBCustomer
 	//update a customer
 	public int updateCustomer(Customer cus)
 	{
+		Customer cusObj = cus;
 		int rc = -1;
 
 		String query = " UPDATE customer SET " + 
-				"name ='" + cus.getName() +"', "+
-				"address ='" + cus.getAddress() +"', "+
-				"zipCode ='" + cus.getZipCode() +"', "+
-				"phoneNo = '" + cus.getPhoneNo() + "'";
+				"name = '" + cusObj.getName() +"', "+
+				"address = '" + cusObj.getAddress() +"', "+
+				"zipCode = '" + cusObj.getZipCode() +"', "+
+				"phoneNo = '" + cusObj.getPhoneNo() + "'";
 
 		System.out.println("Update query: " + query);
 		try

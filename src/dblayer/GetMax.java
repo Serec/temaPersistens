@@ -3,7 +3,7 @@ import java.sql.*;
 
 /**
  * 
- * @author Søren
+ * @author Soren
  * @version 19.03.2015
  */
 
