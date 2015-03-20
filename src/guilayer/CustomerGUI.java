@@ -137,6 +137,7 @@ public class CustomerGUI extends JFrame {
 				txtName.setText(cus.getName());
 				txtAddress.setText(cus.getAddress());
 				txtZipCode.setText(cus.getZipCode());
+				txtCity.setText(cus.getLoc().getCity());
 			}
 		});
 		btnFindKunde.setBounds(261, 196, 98, 23);

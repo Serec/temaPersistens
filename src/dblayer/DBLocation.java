@@ -15,7 +15,7 @@ public class DBLocation {
 	
 	public Location findLocation(String zipCode)
 	{
-		String wClause = " zipCode = '" + "'";
+		String wClause = " zipCode = '" + zipCode + "'";
 		return singleWhere(wClause);
 	}
 	
