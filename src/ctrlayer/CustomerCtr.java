@@ -20,7 +20,7 @@ public class CustomerCtr
 		try
 		{
 			DBConnection.startTransaction();
-			DBCustomer dbCus = new DBCustomer();
+			IFDBCustomer dbCus = new DBCustomer();
 			dbCus.insertCustomer(cusObj);
 			DBConnection.commitTransaction();			
 		}
