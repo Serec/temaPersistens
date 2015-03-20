@@ -121,6 +121,9 @@ public class DBCustomer implements IFDBCustomer
 			{
 				cusObj = buildCustomer(results);
 				stmt.close();	
+				String zip = cusObj.getZipCode();
+				cusObj.setLoc(new DBLocation().findLocation(zip));
+				System.out.println("Location is added to Customer");
 			}
 			else
 			{
