@@ -131,9 +131,9 @@ public class CustomerGUI extends JFrame {
 
 		JButton btnFindKunde = new JButton("Find kunde");
 		btnFindKunde.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {				
 				String phoneNo = txtPhoneNo.getText();
-				Customer cus = cCtr.findByPhoneNo(phoneNo);
+				Customer cus = cCtr.findByPhoneNo(phoneNo);				
 				txtName.setText(cus.getName());
 				txtAddress.setText(cus.getAddress());
 				txtZipCode.setText(cus.getZipCode());
@@ -154,6 +154,8 @@ public class CustomerGUI extends JFrame {
 				if(result == 1)
 				{
 					clearFields();
+					lblMessage.setText("Kunden blev opdateret");
+					lblMessage.setVisible(true);
 				}
 				else
 				{
@@ -170,10 +172,17 @@ public class CustomerGUI extends JFrame {
 		btnSletKunde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String phoneNo = txtPhoneNo.getText();
-				cCtr.deleteCustomer(phoneNo);
+				if(cCtr.deleteCustomer(phoneNo) > 0)
+				{
 				clearFields();
 				lblMessage.setVisible(true);
 				lblMessage.setText("Kunden er slettet.");
+				}
+				else
+				{
+					lblMessage.setVisible(true);
+					lblMessage.setText("Kunden kunne ikke slettes.");
+				}
 				
 			}
 		});
