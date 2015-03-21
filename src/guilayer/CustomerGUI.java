@@ -15,6 +15,8 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class CustomerGUI extends JFrame {
 
@@ -24,7 +26,7 @@ public class CustomerGUI extends JFrame {
 	private JTextField txtName;
 	private JTextField txtAddress;
 	private JTextField txtZipCode;
-	private JTextField txtCity;
+	private JLabel lblCity;
 	private JTextField txtPhoneNo;
 	private JLabel lblMessage;
 
@@ -87,14 +89,23 @@ public class CustomerGUI extends JFrame {
 		txtAddress.setColumns(10);
 
 		txtZipCode = new JTextField();
+		txtZipCode.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent evt) {
+				if(evt.getKeyCode()==KeyEvent.VK_TAB){
+			        evt.consume();
+			        String city = getCity();
+			        lblCity.setText(city);
+			        lblCity.setVisible(true);
+			}
+		}});
 		txtZipCode.setBounds(147, 117, 156, 20);
 		contentPane.add(txtZipCode);
 		txtZipCode.setColumns(10);
 
-		txtCity = new JTextField();
-		txtCity.setBounds(147, 143, 156, 20);
-		contentPane.add(txtCity);
-		txtCity.setColumns(10);
+		lblCity = new JLabel();
+		lblCity.setBounds(147, 143, 156, 20);
+		contentPane.add(lblCity);
 
 		txtPhoneNo = new JTextField();
 		txtPhoneNo.setBounds(147, 167, 156, 20);
@@ -137,7 +148,7 @@ public class CustomerGUI extends JFrame {
 				txtName.setText(cus.getName());
 				txtAddress.setText(cus.getAddress());
 				txtZipCode.setText(cus.getZipCode());
-				txtCity.setText(cus.getLoc().getCity());
+				lblCity.setText(cus.getLoc().getCity());
 			}
 		});
 		btnFindKunde.setBounds(261, 196, 98, 23);
@@ -210,12 +221,18 @@ public class CustomerGUI extends JFrame {
 		txtName.setText("");
 		txtAddress.setText("");
 		txtZipCode.setText("");
-		txtCity.setText("");
+		lblCity.setText("");
 		txtPhoneNo.setText("");
 		lblMessage.setVisible(false);
 	}
 
-
+	private String getCity()
+	{
+		DBLocation dbLoc = new DBLocation();
+		String zipCode = txtZipCode.getText();
+		String city = dbLoc.findLocation(zipCode).getCity();
+		return city;
+	}
 
 
 
