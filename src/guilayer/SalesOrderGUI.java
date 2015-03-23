@@ -124,8 +124,8 @@ public class SalesOrderGUI extends JFrame {
 				String productName = txtSearchProduct.getText();
 				Product pro = pCtr.findByName(productName);
 				
-				model.addRow(new Object[]{pro.getName(),pro.getSalesPrice(),pro.getRentPrice(),pro.getMinStock()});
-				
+				model.addRow(new Object[]{pro.getName(),pro.getSalesPrice(),pro.getRentPrice(),pro.getMinStock(), false});
+				System.out.println(pro.getName() + String.valueOf(pro.getSalesPrice()) +String.valueOf(pro.getRentPrice()) + String.valueOf(pro.getMinStock()));
 			}
 		});
 		btnSearchProduct.setBounds(145, 179, 89, 23);
@@ -139,24 +139,17 @@ public class SalesOrderGUI extends JFrame {
 		scrollPane.setBounds(10, 211, 382, 350);
 		contentPane.add(scrollPane);
 		
-		model = new DefaultTableModel();
+		model = new DefaultTableModel(new Object[][] {},new String[] {	"Produktnavn", "Pris", "Lejepris", "P\u00E5 lager", "Leje"	});
 		
-		table = new JTable(model);
-		table.setModel(model);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Produktnavn", "Pris", "Lejepris", "P\u00E5 lager", "Leje"
-			}
-		) {
+		table = new JTable(model)
+		{
 			Class[] columnTypes = new Class[] {
 				String.class, Double.class, Double.class, Integer.class, Boolean.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-		});
+		};
 		table.getColumnModel().getColumn(0).setPreferredWidth(87);
 		scrollPane.setViewportView(table);
 		
