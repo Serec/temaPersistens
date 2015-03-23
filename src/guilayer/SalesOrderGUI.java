@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -21,6 +23,7 @@ import modellayer.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JCheckBox;
 
 public class SalesOrderGUI extends JFrame {
@@ -36,6 +39,7 @@ public class SalesOrderGUI extends JFrame {
 	private CustomerCtr cCtr;
 	private ProductCtr pCtr;
 	private DefaultTableModel model;
+	private DefaultTableModel model1;
 
 	/**
 	 * Launch the application.
@@ -123,7 +127,7 @@ public class SalesOrderGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String productName = txtSearchProduct.getText();
 				Product pro = pCtr.findByName(productName);
-				
+				sletTabel();
 				model.addRow(new Object[]{pro.getName(),pro.getSalesPrice(),pro.getRentPrice(),pro.getMinStock(), false});
 				System.out.println(pro.getName() + String.valueOf(pro.getSalesPrice()) +String.valueOf(pro.getRentPrice()) + String.valueOf(pro.getMinStock()));
 			}
@@ -157,32 +161,51 @@ public class SalesOrderGUI extends JFrame {
 		scrollPane_1.setBounds(545, 209, 413, 350);
 		contentPane.add(scrollPane_1);
 		
-		table_1 = new JTable();
-		scrollPane_1.setViewportView(table_1);
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Produktnavn", "Pris", "Lejepris", "Antal"
-			}
-		) {
+		model1 = new DefaultTableModel(new Object[][] {},new String[] {	"Produktnavn", "Pris", "Lejepris", "Antal"	});
+		
+		table_1 = new JTable(model1)
+		 {
 			Class[] columnTypes = new Class[] {
 				String.class, Double.class, Double.class, Integer.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-		});
+		};
+		
+//		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();		
+//		rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+//		for(int i = 0; i < table.getColumnCount(); i++)
+//		{
+//			table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
+//		}
+//		
+//		DefaultTableCellRenderer rightRenderer1 = new DefaultTableCellRenderer();		
+//		rightRenderer1.setHorizontalAlignment(SwingConstants.CENTER);
+//		for(int i = 0; i < table_1.getColumnCount(); i++)
+//		{
+//			table_1.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
+//		}
+		scrollPane_1.setViewportView(table_1);
+		
 		
 		JButton btnAddProduct = new JButton("->");
 		btnAddProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String prodName = (String) model.getValueAt(0, 0);
+				Product prod = pCtr.findByName(prodName);
+				model1.addRow(new Object[]{prod.getName(), prod.getSalesPrice(), prod.getRentPrice(), 1});
 			}
 		});
 		btnAddProduct.setBounds(424, 339, 82, 39);
 		contentPane.add(btnAddProduct);
 		
 		JButton btnWithdrawProduct = new JButton("<-");
+		btnWithdrawProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				model1.removeRow(0);
+			}
+		});
 		btnWithdrawProduct.setBounds(424, 415, 82, 39);
 		contentPane.add(btnWithdrawProduct);
 		
@@ -199,5 +222,14 @@ public class SalesOrderGUI extends JFrame {
 		contentPane.add(lblIndkbskurv);
 		
 		// vare tabel
+	}
+	
+	
+	private void sletTabel()
+	{
+		int rowCount = model.getRowCount();
+		for (int i = rowCount - 1; i >= 0; i--) {
+			model.removeRow(i);
+		}	
 	}
 }
