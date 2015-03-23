@@ -68,7 +68,7 @@ public class DBProduct implements IFDBProduct  {
 
 
 	@Override
-	public int deleteProduct(Product product) {
+	public int deleteProduct(String name) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
