@@ -1,11 +1,15 @@
 package modellayer;
 
+import java.util.ArrayList;
+
 public class SalesOrder {
 	
 	private String date;
 	private double price;
 	private String deliveryStatus;
 	private String deliveryDate;
+	private ArrayList<OrderLine> orderlines;
+	private int id;
 	
 	public SalesOrder()
 	{
@@ -17,6 +21,15 @@ public class SalesOrder {
 		this.price = price;
 		this.deliveryStatus = deliveryStatus;
 		this.deliveryDate = deliveryDate;
+	}
+
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getDate() {
@@ -51,17 +64,20 @@ public class SalesOrder {
 		this.deliveryDate = deliveryDate;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public ArrayList<OrderLine> getOrderlines() {
+		return orderlines;
+	}
 
+	public void addOrderLine(OrderLine ol)
+	{
+		orderlines.add(ol);
+	}
+	
+	public void removeOrderLine(OrderLine ol)
+	{
+		if(orderlines.contains(ol))
+		{
+			orderlines.remove(ol);
+		}
+	}
 }
