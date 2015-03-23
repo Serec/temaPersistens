@@ -37,7 +37,7 @@ public class ProductCtr
 	public Product findByName(String name)
 	{
 		IFDBProduct dbProd = new DBProduct();
-		return dbProd.findProduct(name, false);
+		return dbProd.findProduct(name);
 	}
 	
 	public int updateProduct(String name, double purchasePrice, double salesPrice, double rentPrice,

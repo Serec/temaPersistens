@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import modellayer.Customer;
 import modellayer.Product;
 
 public class DBProduct implements IFDBProduct  {
@@ -53,9 +51,9 @@ public class DBProduct implements IFDBProduct  {
 
 
 	//Find a product	
-	public Product findProduct(String phoneNo)
+	public Product findProduct(String name)
 	{
-		String wClause = " phoneNo = '" + phoneNo + "'";
+		String wClause = " name = '" + name + "'";
 		return singleWhere(wClause);
 	}
 
