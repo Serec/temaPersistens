@@ -3,7 +3,6 @@ import ctrlayer.*;
 import dblayer.*;
 import modellayer.*;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
