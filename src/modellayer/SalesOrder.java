@@ -9,6 +9,7 @@ public class SalesOrder {
 	private String deliveryStatus;
 	private String deliveryDate;
 	private ArrayList<OrderLine> orderlines;
+	private int id;
 	
 	public SalesOrder()
 	{
@@ -20,6 +21,15 @@ public class SalesOrder {
 		this.price = price;
 		this.deliveryStatus = deliveryStatus;
 		this.deliveryDate = deliveryDate;
+	}
+
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getDate() {
