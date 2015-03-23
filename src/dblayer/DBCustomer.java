@@ -29,7 +29,7 @@ public class DBCustomer implements IFDBCustomer
 
 		int rc = -1;
 		String query = "INSERT INTO customer "
-				+ "VALUES('" + nextID + "','" + cus.getName() + "','" + cus.getAddress()  + "','" + cus.getZipCode()
+				+ "VALUES(" + nextID + ",'" + cus.getName() + "','" + cus.getAddress()  + "','" + cus.getZipCode()
 				+ "','" + cus.getPhoneNo() +"')";
 
 		System.out.println("insert : " + query);

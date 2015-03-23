@@ -20,8 +20,8 @@ public class DBSalesOrder implements IFDBSalesOrder
 		
 		int rc = -1;
 		String query = "INSERT INTO salesorder "
-				+ "VALUES('" + nextID + "','" + so.getDate() + "','" + so.getDeliveryDate()
-				+ "','" + so.getDeliveryStatus() + "','" + so.getPrice() +"')";
+				+ "VALUES(" + nextID + ",'" + so.getDate() + "','" + so.getPrice()
+				+ "','" + so.getDeliveryStatus() + "','" + so.getDeliveryDate() + "','" + 3 + "')";
 		
 		System.out.println("insert : " + query);
 		

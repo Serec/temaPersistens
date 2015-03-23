@@ -17,9 +17,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import ctrlayer.CustomerCtr;
-import ctrlayer.ProductCtr;
+import ctrlayer.*;
 import modellayer.*;
+import dblayer.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -38,6 +38,7 @@ public class SalesOrderGUI extends JFrame {
 	private JTable table_1;
 	private CustomerCtr cCtr;
 	private ProductCtr pCtr;
+	private SalesOrderCtr soCtr;
 	private DefaultTableModel model;
 	private DefaultTableModel model1;
 
@@ -63,6 +64,7 @@ public class SalesOrderGUI extends JFrame {
 	public SalesOrderGUI() {
 		cCtr = new CustomerCtr();
 		pCtr = new ProductCtr();
+		soCtr = new SalesOrderCtr();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 984, 640);
 		contentPane = new JPanel();
@@ -210,6 +212,28 @@ public class SalesOrderGUI extends JFrame {
 		contentPane.add(btnWithdrawProduct);
 		
 		JButton btnTilBetaling = new JButton("Til betaling");
+		btnTilBetaling.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				SalesOrder sale = new SalesOrder();
+				Product prod = pCtr.findByName((String) model1.getValueAt(0, 0));
+				OrderLine line = new OrderLine((int)model1.getValueAt(0, 3), (double)model1.getValueAt(0, 1), prod, sale);
+				double price = (double) model1.getValueAt(0, 1) * (int) model1.getValueAt(0, 3);
+				try {
+					soCtr.createNewSalesOrder("23042014", price, "Oprettet", null);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				IFDBOrderLine dbLine = new DBOrderLine();
+				try {
+					dbLine.insertOrderLine(line);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		btnTilBetaling.setBounds(826, 570, 132, 31);
 		contentPane.add(btnTilBetaling);
 		
@@ -220,7 +244,6 @@ public class SalesOrderGUI extends JFrame {
 		JLabel lblIndkbskurv = new JLabel("Indk\u00F8bskurv");
 		lblIndkbskurv.setBounds(545, 180, 82, 20);
 		contentPane.add(lblIndkbskurv);
-		
 		// vare tabel
 	}
 	

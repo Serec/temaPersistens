@@ -7,6 +7,7 @@ public class OrderLine {
 	private int quantity;
 	private double  unitPrice;
 	private Product product;
+	private SalesOrder salesOrder;
 	
 	
 	public OrderLine()
@@ -15,7 +16,8 @@ public class OrderLine {
 	}
 
 
-	public OrderLine(int quantity, double unitPrice, Product product) {
+	public OrderLine(int quantity, double unitPrice, Product product, SalesOrder salesOrder) {
+		this.salesOrder = salesOrder;
 		this.quantity = quantity;
 		this.unitPrice = unitPrice;
 		this.product = product;
@@ -24,6 +26,21 @@ public class OrderLine {
 	
 	public int getSalesOrderId() {
 		return salesOrderId;
+	}
+
+
+	public SalesOrder getSalesOrder() {
+		return salesOrder;
+	}
+
+
+	public void setSalesOrder(SalesOrder salesOrder) {
+		this.salesOrder = salesOrder;
+	}
+
+
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
 
