@@ -17,6 +17,10 @@ public class Product
 	public void setSupplierID(int supplierID) {
 		this.supplierID = supplierID;
 	}
+	
+	public Product(){
+		
+	}
 
 	public Product(String name, double purchasePrice, double salesPrice, double rentPrice, String countryOfOrigin, int minStock, int supplierID)
 	{
