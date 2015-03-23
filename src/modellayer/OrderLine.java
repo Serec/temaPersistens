@@ -2,6 +2,8 @@ package modellayer;
 
 public class OrderLine {
 
+	private int salesOrderId;
+	private int productId;
 	private int quantity;
 	private double  unitPrice;
 	private Product product;
@@ -17,6 +19,26 @@ public class OrderLine {
 		this.quantity = quantity;
 		this.unitPrice = unitPrice;
 		this.product = product;
+	}
+
+	
+	public int getSalesOrderId() {
+		return salesOrderId;
+	}
+
+
+	public void setSalesOrderId(int salesOrderId) {
+		this.salesOrderId = salesOrderId;
+	}
+
+
+	public int getProductId() {
+		return productId;
+	}
+
+
+	public void setProductOrderId(int productId) {
+		this.productId = productId;
 	}
 
 

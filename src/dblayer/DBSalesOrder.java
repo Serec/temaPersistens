@@ -74,7 +74,6 @@ public class DBSalesOrder implements IFDBSalesOrder
 	
 	public int deleteSalesOrder(SalesOrder so)
 	{
-		SalesOrder soObj = so;
 		int rc = -1;
 		String query = "DELETE FROM salesorder WHERE id = '" + so.getId() + "'";
 		System.out.println(query);
