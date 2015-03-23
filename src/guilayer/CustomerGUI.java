@@ -89,16 +89,16 @@ public class CustomerGUI extends JFrame {
 		txtAddress.setColumns(10);
 
 		txtZipCode = new JTextField();
-		txtZipCode.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent evt) {
-				if(evt.getKeyCode()==KeyEvent.VK_TAB){
-			        evt.consume();
-			        String city = getCity();
-			        lblCity.setText(city);
-			        lblCity.setVisible(true);
-			}
-		}});
+//		txtZipCode.addKeyListener(new KeyAdapter() {
+//			@Override
+//			public void keyPressed(KeyEvent evt) {
+//				if(evt.getKeyCode()==KeyEvent.VK_TAB){
+//			        evt.consume();
+//			        String city = getCity();
+//			        lblCity.setText(city);
+//			        lblCity.setVisible(true);
+//			}
+//		}});
 		txtZipCode.setBounds(147, 117, 156, 20);
 		contentPane.add(txtZipCode);
 		txtZipCode.setColumns(10);
