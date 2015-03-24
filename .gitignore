@@ -14,3 +14,4 @@ hs_err_pid*
 
 #Include /lib/ folder
 !/lib/
+/forms-1.3.0-src.zip
