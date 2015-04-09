@@ -28,9 +28,9 @@ public class DBProduct implements IFDBProduct  {
 		            product.getSalesPrice() + "','" +
 		            product.getRentPrice() + "','" +
 		            product.getCountryOfOrigin() + "','" +
-		            product.getMinStock() + "','" +
+		            product.getMinStock() + "'," +
 		            product.getSupplierID()
-		            		+ "')";
+		            		+ ")";
 		   
 		   System.out.println("insert : " + query);
 		   

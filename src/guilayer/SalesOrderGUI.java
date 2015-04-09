@@ -12,15 +12,18 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import ctrlayer.CustomerCtr;
-import ctrlayer.ProductCtr;
+import ctrlayer.*;
 import modellayer.*;
+import dblayer.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JCheckBox;
 
 public class SalesOrderGUI extends JFrame {
@@ -35,7 +38,9 @@ public class SalesOrderGUI extends JFrame {
 	private JTable table_1;
 	private CustomerCtr cCtr;
 	private ProductCtr pCtr;
+	private SalesOrderCtr soCtr;
 	private DefaultTableModel model;
+	private DefaultTableModel model1;
 
 	/**
 	 * Launch the application.
@@ -59,6 +64,7 @@ public class SalesOrderGUI extends JFrame {
 	public SalesOrderGUI() {
 		cCtr = new CustomerCtr();
 		pCtr = new ProductCtr();
+		soCtr = new SalesOrderCtr();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 984, 640);
 		contentPane = new JPanel();
@@ -123,9 +129,9 @@ public class SalesOrderGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String productName = txtSearchProduct.getText();
 				Product pro = pCtr.findByName(productName);
-				
-				model.addRow(new Object[]{pro.getName(),pro.getSalesPrice(),pro.getRentPrice(),pro.getMinStock()});
-				
+				sletTabel();
+				model.addRow(new Object[]{pro.getName(),pro.getSalesPrice(),pro.getRentPrice(),pro.getMinStock(), false});
+				System.out.println(pro.getName() + String.valueOf(pro.getSalesPrice()) +String.valueOf(pro.getRentPrice()) + String.valueOf(pro.getMinStock()));
 			}
 		});
 		btnSearchProduct.setBounds(145, 179, 89, 23);
@@ -139,24 +145,17 @@ public class SalesOrderGUI extends JFrame {
 		scrollPane.setBounds(10, 211, 382, 350);
 		contentPane.add(scrollPane);
 		
-		model = new DefaultTableModel();
+		model = new DefaultTableModel(new Object[][] {},new String[] {	"Produktnavn", "Pris", "Lejepris", "P\u00E5 lager", "Leje"	});
 		
-		table = new JTable(model);
-		table.setModel(model);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Produktnavn", "Pris", "Lejepris", "P\u00E5 lager", "Leje"
-			}
-		) {
+		table = new JTable(model)
+		{
 			Class[] columnTypes = new Class[] {
 				String.class, Double.class, Double.class, Integer.class, Boolean.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-		});
+		};
 		table.getColumnModel().getColumn(0).setPreferredWidth(87);
 		scrollPane.setViewportView(table);
 		
@@ -164,36 +163,77 @@ public class SalesOrderGUI extends JFrame {
 		scrollPane_1.setBounds(545, 209, 413, 350);
 		contentPane.add(scrollPane_1);
 		
-		table_1 = new JTable();
-		scrollPane_1.setViewportView(table_1);
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Produktnavn", "Pris", "Lejepris", "Antal"
-			}
-		) {
+		model1 = new DefaultTableModel(new Object[][] {},new String[] {	"Produktnavn", "Pris", "Lejepris", "Antal"	});
+		
+		table_1 = new JTable(model1)
+		 {
 			Class[] columnTypes = new Class[] {
 				String.class, Double.class, Double.class, Integer.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-		});
+		};
+		
+//		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();		
+//		rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+//		for(int i = 0; i < table.getColumnCount(); i++)
+//		{
+//			table.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
+//		}
+//		
+//		DefaultTableCellRenderer rightRenderer1 = new DefaultTableCellRenderer();		
+//		rightRenderer1.setHorizontalAlignment(SwingConstants.CENTER);
+//		for(int i = 0; i < table_1.getColumnCount(); i++)
+//		{
+//			table_1.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
+//		}
+		scrollPane_1.setViewportView(table_1);
+		
 		
 		JButton btnAddProduct = new JButton("->");
 		btnAddProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String prodName = (String) model.getValueAt(0, 0);
+				Product prod = pCtr.findByName(prodName);
+				model1.addRow(new Object[]{prod.getName(), prod.getSalesPrice(), prod.getRentPrice(), 1});
 			}
 		});
 		btnAddProduct.setBounds(424, 339, 82, 39);
 		contentPane.add(btnAddProduct);
 		
 		JButton btnWithdrawProduct = new JButton("<-");
+		btnWithdrawProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				model1.removeRow(0);
+			}
+		});
 		btnWithdrawProduct.setBounds(424, 415, 82, 39);
 		contentPane.add(btnWithdrawProduct);
 		
 		JButton btnTilBetaling = new JButton("Til betaling");
+		btnTilBetaling.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				SalesOrder sale = new SalesOrder();
+				Product prod = pCtr.findByName((String) model1.getValueAt(0, 0));
+				OrderLine line = new OrderLine((int)model1.getValueAt(0, 3), (double)model1.getValueAt(0, 1), prod, sale);
+				double price = (double) model1.getValueAt(0, 1) * (int) model1.getValueAt(0, 3);
+				try {
+					soCtr.createNewSalesOrder("23042014", price, "Oprettet", null);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				IFDBOrderLine dbLine = new DBOrderLine();
+				try {
+					dbLine.insertOrderLine(line);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		btnTilBetaling.setBounds(826, 570, 132, 31);
 		contentPane.add(btnTilBetaling);
 		
@@ -204,7 +244,15 @@ public class SalesOrderGUI extends JFrame {
 		JLabel lblIndkbskurv = new JLabel("Indk\u00F8bskurv");
 		lblIndkbskurv.setBounds(545, 180, 82, 20);
 		contentPane.add(lblIndkbskurv);
-		
 		// vare tabel
+	}
+	
+	
+	private void sletTabel()
+	{
+		int rowCount = model.getRowCount();
+		for (int i = rowCount - 1; i >= 0; i--) {
+			model.removeRow(i);
+		}	
 	}
 }

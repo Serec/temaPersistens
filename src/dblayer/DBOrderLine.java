@@ -15,13 +15,14 @@ public class DBOrderLine implements IFDBOrderLine
 
 	public int insertOrderLine(OrderLine ol) throws Exception
 	{
-		int nextID = GetMax.GetMaxID("Select max(id) from orderline");
-		nextID += 1;
-		System.out.println("next id = " + nextID);
+//		int nextID = GetMax.GetMaxID("Select max(id) from orderline");
+//		nextID += 1;
+//		System.out.println("next id = " + nextID);
+		String olName = ol.getProduct().getName();
 
 		int rc = -1;
 		String query = "INSERT INTO orderline "
-				+ "VALUES('" + nextID + "','" + ol.getQuantity() + "','" + ol.getUnitPrice()+ "')";
+				+ "VALUES('" + ol.getQuantity() + "','" + ol.getUnitPrice() + "','" + ol.getSalesOrder().getId() + "','" + "(SELCET id FROM Product WHERE name = " + olName + ")" + "')";
 
 		System.out.println("insert : " + query);
 
